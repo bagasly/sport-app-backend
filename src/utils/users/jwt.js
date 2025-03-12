@@ -7,7 +7,7 @@ exports.generateToken = (user) => {
   const payload = {
     id: user.id,
     name: user.fullname,  // Menyimpan nama user
-    exp: Math.floor(Date.now() / 1000) + 60 * 60 * 24, // Token expire dalam 1 jam
+    exp: Math.floor(Date.now() / 1000) + 60 * 60 * 24,
   };
 
   return jwt.sign(payload, process.env.JWT_SECRET);
