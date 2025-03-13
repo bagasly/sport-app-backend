@@ -66,8 +66,7 @@ exports.verifyOtpAndCreateUser = async (req, res) => {
         return res.status(400).json({ message: "OTP tidak valid atau kadaluarsa" });
       }
   
-      const hashedPassword = await bcrypt.hash(password, process.env.SALT_ROUNDS);
-  
+      const hashedPassword = await bcrypt.hash(password, process.env.BCRYPT_SALT);
       // Simpan user ke database
       const user = await prisma.user.create({
         data: { fullname, username, email, phone, password: hashedPassword },
@@ -81,7 +80,7 @@ exports.verifyOtpAndCreateUser = async (req, res) => {
   
       return res.status(201).json({ message: "Registrasi berhasil", token });
     } catch (error) {
-      return res.status(500).json({ message: "Terjadi kesalahan", error });
+      return res.status(500).json({ message: "Terjadi kesalahan", error: error.message });
     }
   };
   

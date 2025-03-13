@@ -4,8 +4,6 @@ const { generateOtp } = require("../../utils/users/generateOtp");
 
 const OTP_EXPIRY = 300; // OTP berlaku selama 5 menit
 
-
-
 // Simpan OTP ke Redis
 exports.storeOtp = async (phone) => {
   const otp = generateOtp();
